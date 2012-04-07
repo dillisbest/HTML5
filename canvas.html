@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script type="text/javascript">
+	function drawDiagonal(){
+			try{
+			document.createElement("canvas").getContext("2d");
+			document.getElementById("support").innerHTML="HTML5 canvas is supported in your browser.";
+			}catch(e){
+				document.getElementById("support").innerHTML="HTML5 canvas is not supported in your browser.";
+				}
+				
+			var canvas = document.getElementById('diagonal');
+			var context = canvas.getContext('2d');
+			
+			context.beginPath();
+			context.moveTo(70,140);
+			context.lineTo(140,70);
+			
+			context.stroke();
+			//another
+			context.save();
+			
+			context.translate(270,140);
+			
+			context.beginPath();
+			context.moveTo(0,0);
+			context.lineTo(70,-70);
+			
+			context.stroke();
+			context.restore();
+		}
+		
+		function drawTrails(){
+			var canvas = document.getElementById("trails");
+			var context = canvas.getContext('2d');
+			
+			context.save();
+			context.translate(130,250);
+			
+			createCanopyPath(context);
+			
+			//设置线条
+			context.lineWidth=4;
+			context.lineJoin='round';
+			context.strokeStyle='#663300';
+			
+			//设置填充
+			context.fillStyle='#339900';
+			context.fill();
+			
+			//设置矩形填充
+			context.fillStyle='#663300';
+			context.fillRect(-5,-50,10,50);
+			
+			context.stroke();
+			context.restore();
+			}
+		
+		function createCanopyPath(context){
+			context.beginPath();
+			
+			context.moveTo(-25,-50);
+			context.lineTo(-10,-80);
+			context.lineTo(-20,-80);
+			context.lineTo(-5,-110);
+			context.lineTo(-15,-110);
+			
+			context.lineTo(0,-140);
+			
+			context.lineTo(15,-110);
+			context.lineTo(5,-110);
+			context.lineTo(20,-80);
+			context.lineTo(10,-80);
+			context.lineTo(25,-50);
+			
+			context.closePath();
+			}
+		
+		window.addEventListener("load",drawDiagonal,true);
+		window.addEventListener("load",drawTrails,true);
+</script>
+</head>
+
+<body>
+<div id="support"></div>
+<canvas id="diagonal" height="200" width="400" style="border: 1px solid;">
+Update your browser to enjoy canvas!
+</canvas>
+
+<canvas id="trails" height="400" width="400" style="border: 1px solid;"> </canvas>
+
+</body>
+</html>
+
